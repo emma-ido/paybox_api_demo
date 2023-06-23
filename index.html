@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Trial Payment</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+<body>
+
+	<script type="text/javascript">
+		$(function(){
+
+			$('#submit_button').on('click', 
+				function() {
+					// console.log($('#mode').val());
+
+					var form = new FormData(document.getElementById("paymentForm"));
+					form.append("order_id", "TRIAL789");
+					form.append("callback_url", "https://ecom-emmankelam.000webhostapp.com/api/callback.php");
+					$.ajax({
+						"url": "https://paybox.com.co/pay",
+						"type": 'POST',
+						"processData": false,
+  						"mimeType": "multipart/form-data",
+  						"contentType": false,
+						"data": form,
+						"headers": {
+							"Authorization": "Bearer " + "1aacf811-5c36-4a08-9838-1b96997408f7"
+						},
+						success:function(view_data) {
+					        console.log(view_data); //Shows the correct piece of information
+					    },
+					    error:function(view_data) {
+					        console.log(view_data); //Shows the correct piece of information
+					    },
+						"async": false
+					})
+				});
+		
+		
+
+		});
+	</script>
+
+	<form id="paymentForm">
+		
+		<select name="mobile_network">
+			<option value="Mtn">Mtn</option>
+			<option value="AirtelTigo">AirtelTigo</option>
+			<option value="Vodafone">Vodafone</option>
+		</select>
+		
+		<br>
+		
+		<input type="number" name="amount" id="amount" placeholder="amount">
+		
+		<br>
+		
+		<input type="text" name="mobile_number" id="mobile_number" placeholder="mobile number">
+		
+		<br>
+		
+		<select name="mode" id="mode">
+			<option value="Test" selected="selected">Test</option>
+			<option value="Mobile Money">Mobile Money</option>
+		</select>
+		
+		<br>
+
+		<select name="currency" id="currency">
+			<option value="GHS">GHS</option>
+			<option value="USD">USD</option>
+		</select>
+
+		<br>
+
+		<input type="button" value="hello" id="submit_button">
+	</form>
+
+</body>
+</html>
