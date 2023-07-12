@@ -8,6 +8,7 @@
 </head>
 <body>
 
+<script src='https://widget.paybox.com.co/js/app.js' defer></script>
 	<script type="text/javascript">
 		$(function(){
 
@@ -17,7 +18,10 @@
 
 					var form = new FormData(document.getElementById("paymentForm"));
 					form.append("order_id", "TRIAL789");
+					// https://ecom-emmankelam.000webhostapp.com/api/callback.php
+					// https://eof9rxvsnb6rqbt.m.pipedream.net
 					form.append("callback_url", "https://ecom-emmankelam.000webhostapp.com/api/callback.php");
+					form.append("payload", "{\"key\":\"something good\"}");
 					$.ajax({
 						"url": "https://paybox.com.co/pay",
 						"type": 'POST',
